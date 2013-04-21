@@ -1,3 +1,6 @@
+require 'cleverbot'
+require 'htmlentities'
+
 module Hipbot
   module Plugins
     class Human < Hipbot::Plugin
