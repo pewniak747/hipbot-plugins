@@ -6,8 +6,8 @@ require 'hipbot-plugins/version'
 Gem::Specification.new do |gem|
   gem.name          = "hipbot-plugins"
   gem.version       = Hipbot::Plugins::VERSION
-  gem.authors       = ["Tomasz Pewiński"]
-  gem.email         = ["pewniak747@gmail.com"]
+  gem.authors       = ["Bartosz Kopiński", "Tomasz Pewiński"]
+  gem.email         = ["bartosz.kopinski@netguru.pl", "pewniak747@gmail.com"]
   gem.description   = %q{A collection of plugins to use in your hipbot installation}
   gem.summary       = %q{A collection of plugins to use in your hipbot installation}
   gem.homepage      = "https://github.com/netguru/hipbot-plugins"
