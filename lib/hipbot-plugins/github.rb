@@ -7,7 +7,7 @@ module Hipbot
 
       on /^github (.+)/ do |query|
         query = URI::encode query
-        reply "https://github.com/search?q=#{query}+%#{organization}&ref=searchresults&type=Code&s=indexed"
+        reply "https://github.com/search?q=#{query}+%40#{organization}&ref=searchresults&type=Code&s=indexed"
       end
     end
   end
