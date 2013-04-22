@@ -3,7 +3,7 @@ require 'wolfram'
 module Hipbot
   module Plugins
     class WolframAlpha < Hipbot::Plugin
-      def intialize(key)
+      def initialize(key)
         Wolfram.appid = key
       end
 
