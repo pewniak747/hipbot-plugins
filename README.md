@@ -70,6 +70,21 @@ Hipbot responds to:
 
 ( For this to work you need to define `project` and `organization` methods as a response helpers: https://github.com/pewniak747/hipbot#response-helpers )
 
+### Hipbot::Plugins::MemeGenerator
+
+Create instant memes using memegenerator.net! You need to register there to have api access.
+
+Configuration:
+
+``` ruby
+class MyCompanyBot < Hipbot::Bot
+  configure do |c|
+    # ...
+    c.plugins   = [ Hipbot::Plugins::MemeGenerator.new('myusername', 'mypassword') ]
+  end
+end
+```
+
 ### Hipbot::Plugins::UrbanDictionary
 
 Explains reality using UrbanDictionary.com
