@@ -95,7 +95,16 @@ Hipbot responds to:
 
 ### Hipbot::Plugins::WolframAlpha
 
-Adds the ability to use wolframalpha.com computational search engine.
+Adds the ability to use wolframalpha.com computational search engine. You need to register for api key.
+
+``` ruby
+class MyCompanyBot < Hipbot::Bot
+  configure do |c|
+    # ...
+    c.plugins   = [ Hipbot::Plugins::WolframAlpha.new('my-api-key') ]
+  end
+end
+```
 
 Hipbot responds to:
 

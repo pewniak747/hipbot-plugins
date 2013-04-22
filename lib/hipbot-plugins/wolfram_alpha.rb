@@ -3,6 +3,10 @@ require 'wolfram'
 module Hipbot
   module Plugins
     class WolframAlpha < Hipbot::Plugin
+      def intialize(key)
+        Wolfram.appid = key
+      end
+
       on /^wolfram (.+)/ do |query|
         result = Wolfram.fetch(query)
         result.pods[1..3].each do |pod|
