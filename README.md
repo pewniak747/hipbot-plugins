@@ -70,6 +70,14 @@ Hipbot responds to:
 
 ( For this to work you need to define `project` and `organization` methods as a response helpers: https://github.com/pewniak747/hipbot#response-helpers )
 
+### Hipbot::Plugins::UrbanDictionary
+
+Explains reality using UrbanDictionary.com
+
+Hipbot responds to:
+
+* explain the meaning of life, the universe and everything
+
 ## Contributing
 
 1. Fork it
