@@ -59,7 +59,7 @@ Hipbot responds to:
 * something vs somethingelse vs someoranother vs ...
 * translate en:pl something I want to translate
 
-### Github
+### Hipbot::Plugins::Github
 
 Can generate links to github
 
