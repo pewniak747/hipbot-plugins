@@ -1,7 +1,8 @@
-require_relative '../lib/hipbot-plugins'
+require 'spec_helper'
 
 describe Hipbot::Plugins::MemeGenerator::Generator do
-  let(:meme) { stub_everything }
+  let(:meme) { stub.as_null_object }
+
   describe "splitting text" do
     it "should split text according to quotation marks" do
       generator = described_class.new(meme, '"I don\'t always do a deploy" "but when I do, I do it on friday"')
