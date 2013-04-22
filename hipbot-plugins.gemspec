@@ -20,4 +20,5 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'cleverbot'
   gem.add_runtime_dependency 'htmlentities'
   gem.add_runtime_dependency 'urban'
+  gem.add_runtime_dependency 'wolfram'
 end

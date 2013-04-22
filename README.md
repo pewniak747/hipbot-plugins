@@ -78,6 +78,14 @@ Hipbot responds to:
 
 * explain the meaning of life, the universe and everything
 
+### Hipbot::Plugins::WolframAlpha
+
+Adds the ability to use wolframalpha.com computational search engine.
+
+Hipbot responds to:
+
+* wolfram plot x^2 + 3x - 1
+
 ## Contributing
 
 1. Fork it
