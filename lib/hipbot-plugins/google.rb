@@ -26,7 +26,11 @@ module Hipbot
 
       on /^image (.+)/ do |search|
         get('http://ajax.googleapis.com/ajax/services/search/images', { q: URI::encode(search), safe: 'moderate', v: '1.0', hl: 'pl', imgsz: 'large', rsz: 1 }) do |http|
-          reply http.json['responseData']['results'].sample['url']
+          if http.json['responseData']['results'].present?
+            reply http.json['responseData']['results'].sample['url']
+          else
+            reply "I found nothing, #{sender}"
+          end
         end
       end
 
