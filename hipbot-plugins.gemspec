@@ -22,5 +22,6 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'urban'
   gem.add_runtime_dependency 'wolfram'
 
+  gem.add_development_dependency 'rake'
   gem.add_development_dependency 'rspec'
 end
