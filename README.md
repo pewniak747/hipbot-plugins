@@ -1,5 +1,9 @@
 # hipbot-plugins
 
+[![Build Status](https://travis-ci.org/netguru/hipbot-plugins.png?branch=master)](https://travis-ci.org/netguru/hipbot-plugins)
+[![Code Climate](https://codeclimate.com/github/netguru/hipbot-plugins.png)](https://codeclimate.com/github/netguru/hipbot-plugins)
+[![Gem Version](https://badge.fury.io/rb/hipbot-plugins.png)](http://badge.fury.io/rb/hipbot-plugins)
+
 This is a collection of open-source plugins for https://github.com/pewniak747/hipbot, initially developped at http://netguru.co
 
 ## Installation
