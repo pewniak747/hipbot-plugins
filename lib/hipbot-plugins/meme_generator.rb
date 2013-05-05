@@ -1,13 +1,6 @@
 module Hipbot
   module Plugins
     class MemeGenerator < Hipbot::Plugin
-      attr_accessor :username, :password
-
-      def initialize(username, password)
-        self.username = username
-        self.password = password
-      end
-
       on /^memes/ do
         reply(Generator.memes.keys.sort.join(', '))
       end
@@ -15,26 +8,24 @@ module Hipbot
       on /^meme (\w+)\s+(.*)/ do |meme, text|
         generator = Generator.new(meme, text)
         query = {
-          username: plugin.username,
-          password: plugin.password,
-          generatorID: generator.generator_id,
-          imageID: generator.image_id,
-          text0: generator.upper_text,
-          text1: generator.lower_text
+          u: generator.image_url,
+          tt: generator.upper_text,
+          tb: generator.lower_text
         }
-        get('http://version1.api.memegenerator.net/Instance_Create', query) do |http|
-          if http.json['success']
-            image_url = http.json['result']['instanceImageUrl']
-            reply(image_url)
-          end
-        end
+        image_url = "http://memecaptain.com/i?#{query.to_query}"
+        reply(image_url)
       end
 
       class Generator
-        attr_reader :upper_text, :lower_text, :generator_id, :image_id
+        attr_reader :upper_text, :lower_text, :meme
         def initialize meme, text
+          @meme = meme
           assign_texts(text)
-          assign_generator(meme)
+        end
+
+        def image_url
+          meme_name = self.class.memes.fetch(meme.to_s)
+          "http://memecaptain.com/#{meme_name}.jpg"
         end
 
         private
@@ -56,20 +47,14 @@ module Hipbot
           @lower_text = lower_text.to_s.strip
         end
 
-        def assign_generator meme
-          @generator_id, @image_id = *self.class.memes.fetch(meme.to_sym, [2, 166088])
-        end
-
         def self.memes
           {
-            yuno: [2, 166088],
-            idontalways: [74, 2485],
-            allthethings: [6013, 1121885],
-            yodawg: [79, 108785],
-            orly: [920, 117049],
-            toodamnhigh: [998, 203665],
-            fry: [305, 84688],
-            friday: [2003, 558116]
+            "yuno" => "y_u_no",
+            "idontalways" => "most_interesting",
+            "allthethings" => "all_the_things",
+            "yodawg" => "xzibit",
+            "toodamnhigh" => "too_damn_high",
+            "fry" => "fry"
           }
         end
       end

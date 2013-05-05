@@ -76,18 +76,12 @@ Hipbot responds to:
 
 ### Hipbot::Plugins::MemeGenerator
 
-Create instant memes using memegenerator.net! You need to register there to have api access.
+Create instant memes using memecaptain.com!
 
-Configuration:
+Hipbot responds to:
 
-``` ruby
-class MyCompanyBot < Hipbot::Bot
-  configure do |c|
-    # ...
-    c.plugins   = [ Hipbot::Plugins::MemeGenerator.new('myusername', 'mypassword') ]
-  end
-end
-```
+* memes
+* meme allthethings "create all" "the memes!"
 
 ### Hipbot::Plugins::UrbanDictionary
 
