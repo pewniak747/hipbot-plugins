@@ -3,9 +3,7 @@ require 'wolfram'
 module Hipbot
   module Plugins
     class WolframAlpha < Hipbot::Plugin
-      def initialize(key)
-        Wolfram.appid = key
-      end
+      delegate :appid=, to: :Wolfram
 
       on /^wolfram (.+)/ do |query|
         result = Wolfram.fetch(query)

@@ -1,6 +1,8 @@
 module Hipbot
   module Plugins
     class MemeGenerator < Hipbot::Plugin
+      attr_accessor :username, :password
+
       on /^memes/ do
         reply(Generator.memes.keys.sort.join(', '))
       end
