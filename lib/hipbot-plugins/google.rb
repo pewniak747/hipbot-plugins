@@ -1,6 +1,8 @@
 module Hipbot
   module Plugins
-    class Google < Hipbot::Plugin
+    class Google
+      extend Hipbot::Plugin
+
       on /^google (.+)/ do |search|
         get('http://ajax.googleapis.com/ajax/services/search/web', { q: URI::encode(search), safe: 'off', v: '1.0' }) do |http|
           http.json['responseData']['results'].each do |page|

@@ -1,6 +1,8 @@
 module Hipbot
   module Plugins
-    class Github < Hipbot::Plugin
+    class Github
+      extend Hipbot::Plugin
+
       on /^compare (\w+)(?: to)? (\w+)$/, room: true do |stage1, stage2|
         reply "https://github.com/#{organization}/#{project.name}/compare/#{stage1}...#{stage2}" if project
       end

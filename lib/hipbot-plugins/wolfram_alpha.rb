@@ -2,7 +2,9 @@ require 'wolfram'
 
 module Hipbot
   module Plugins
-    class WolframAlpha < Hipbot::Plugin
+    class WolframAlpha
+      extend Hipbot::Plugin
+
       delegate :appid=, to: :Wolfram
 
       on /^wolfram (.+)/ do |query|

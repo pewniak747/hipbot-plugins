@@ -3,7 +3,9 @@ require 'htmlentities'
 
 module Hipbot
   module Plugins
-    class Human < Hipbot::Plugin
+    class Human
+      extend Hipbot::Plugin
+
       on /^hello/ do
         reply("hello #{sender.first_name}!")
       end
@@ -41,8 +43,8 @@ module Hipbot
         reply("#{message.sender.first_name}, everything is going to be alright!")
       end
 
+      cleverbot = Cleverbot::Client.new
       default do |message|
-        cleverbot = Cleverbot::Client.new
         coder     = HTMLEntities.new
         reply(coder.decode(cleverbot.write(message)) || 'I don\'t undersand you')
       end

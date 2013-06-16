@@ -2,7 +2,9 @@ require 'urban'
 
 module Hipbot
   module Plugins
-    class UrbanDictionary < Hipbot::Plugin
+    class UrbanDictionary
+      extend Hipbot::Plugin
+
       on /^explain (.+)/ do |phrase|
         entry = Urban::Dictionary.search(phrase)
         definition = entry.definitions.try(:first)

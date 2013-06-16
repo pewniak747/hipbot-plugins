@@ -1,6 +1,8 @@
 module Hipbot
   module Plugins
-    class MemeGenerator < Hipbot::Plugin
+    class MemeGenerator
+      extend Hipbot::Plugin
+
       attr_accessor :username, :password
 
       on /^memes/ do
