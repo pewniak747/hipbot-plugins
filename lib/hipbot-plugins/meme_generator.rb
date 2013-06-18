@@ -5,10 +5,12 @@ module Hipbot
 
       attr_accessor :username, :password
 
+      desc 'list available memes to generate'
       on /^memes/ do
         reply(Generator.memes.keys.sort.join(', '))
       end
 
+      desc 'generates new meme eg. `meme allthethings Generate all the memes!`'
       on /^meme (\w+)\s+(.*)/ do |meme, text|
         generator = Generator.new(meme, text)
         query = {

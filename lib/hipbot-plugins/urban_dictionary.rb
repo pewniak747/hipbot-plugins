@@ -5,6 +5,7 @@ module Hipbot
     class UrbanDictionary
       extend Hipbot::Plugin
 
+      desc 'explains a phrase using UrbanDictionary'
       on /^explain (.+)/ do |phrase|
         entry = Urban::Dictionary.search(phrase)
         definition = entry.definitions.try(:first)

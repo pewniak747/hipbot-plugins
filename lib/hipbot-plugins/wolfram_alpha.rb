@@ -7,6 +7,7 @@ module Hipbot
 
       delegate :appid=, to: :Wolfram
 
+      desc 'returns first three WolframAlpha search results'
       on /^wolfram (.+)/ do |query|
         result = Wolfram.fetch(query)
         result.pods[1..3].each do |pod|

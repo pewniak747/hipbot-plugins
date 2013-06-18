@@ -3,6 +3,7 @@ module Hipbot
     class Google
       extend Hipbot::Plugin
 
+      desc 'returns first few results for Google search'
       on /^google (.+)/ do |search|
         get('http://ajax.googleapis.com/ajax/services/search/web', { q: URI::encode(search), safe: 'off', v: '1.0' }) do |http|
           http.json['responseData']['results'].each do |page|
@@ -11,6 +12,7 @@ module Hipbot
         end
       end
 
+      desc 'does an Google result count comparision eg. `firefox vs chrome vs ie`'
       on /^(.+ vs?\.? .+)/i do |battle|
         winner  = { score: 0 }
         objects = battle.split(/ vs?\.? /i)
@@ -26,6 +28,7 @@ module Hipbot
         notify("...and the winner is #{winner[:name]}!", 'Google')
       end
 
+      desc 'returns sample result of Google image search eg. `image trollface`'
       on /^image (.+)/ do |search|
         get('http://ajax.googleapis.com/ajax/services/search/images', { q: URI::encode(search), safe: 'moderate', v: '1.0', hl: 'pl', imgsz: 'large', rsz: 1 }) do |http|
           if http.json['responseData']['results'].present?
@@ -36,12 +39,14 @@ module Hipbot
         end
       end
 
+      desc 'returns sample result of YouTube search eg. `yt rick roll`'
       on /^youtube (.+)/, /^yt (.+)/ do |query|
         get('http://gdata.youtube.com/feeds/api/videos', { q: URI::encode(query), alt: 'json', :'max-results' => 3, orderBy: 'relevance'}) do |http|
           reply http.json['feed']['entry'].sample['link'][0]['href']
         end
       end
 
+      decs 'translates text using Google Translate eg. `translate en:pl Hello world`'
       on /^translate (.+)/ do |query|
         params, text  = query.split(' ', 2)
         from, to      = params.split(':')
