@@ -46,7 +46,7 @@ module Hipbot
         end
       end
 
-      decs 'translates text using Google Translate eg. `translate en:pl Hello world`'
+      desc 'translates text using Google Translate eg. `translate en:pl Hello world`'
       on /^translate (.+)/ do |query|
         params, text  = query.split(' ', 2)
         from, to      = params.split(':')
