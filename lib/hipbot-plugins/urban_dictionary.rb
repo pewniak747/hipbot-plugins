@@ -3,7 +3,7 @@ require 'urban'
 module Hipbot
   module Plugins
     class UrbanDictionary
-      extend Hipbot::Plugin
+      include Hipbot::Plugin
 
       desc 'explains a phrase using UrbanDictionary'
       on /^explain (.+)/ do |phrase|

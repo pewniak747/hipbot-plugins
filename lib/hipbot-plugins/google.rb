@@ -1,7 +1,7 @@
 module Hipbot
   module Plugins
     class Google
-      extend Hipbot::Plugin
+      include Hipbot::Plugin
 
       desc 'returns first few results for Google search'
       on /^google (.+)/ do |search|

@@ -4,7 +4,7 @@ require 'htmlentities'
 module Hipbot
   module Plugins
     class Human
-      extend Hipbot::Plugin
+      include Hipbot::Plugin
 
       desc 'kindly greets the sender'
       on /^hello/ do

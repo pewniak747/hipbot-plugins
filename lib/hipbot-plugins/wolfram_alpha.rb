@@ -3,7 +3,7 @@ require 'wolfram'
 module Hipbot
   module Plugins
     class WolframAlpha
-      extend Hipbot::Plugin
+      include Hipbot::Plugin
 
       delegate :appid=, to: :Wolfram
 

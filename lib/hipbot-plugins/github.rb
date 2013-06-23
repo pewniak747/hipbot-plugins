@@ -1,7 +1,7 @@
 module Hipbot
   module Plugins
     class Github
-      extend Hipbot::Plugin
+      include Hipbot::Plugin
 
       desc 'links to two github branches comparision eg. `compare master to stable`'
       on /^compare (\w+)(?: to)? (\w+)$/, room: true do |stage1, stage2|
