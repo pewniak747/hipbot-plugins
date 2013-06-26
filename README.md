@@ -26,10 +26,8 @@ require 'hipbot-plugins'
 
 class MyCompanyBot < Hipbot::Bot
   configure do |c|
-    c.name      = 'robot'
     c.jid       = 'changeme@chat.hipchat.com'
     c.password  = 'secret'
-    c.plugins   = [ Hipbot::Plugins::Human, Hipbot::Plugins::Google ]
   end
 end
 ```
@@ -46,7 +44,6 @@ Hipbot responds to:
 * open the pod bay door
 * make me a sandwich
 * slap @someone
-* insult @someone
 * choose
 * comfort me
 * (AI simulation with Cleverbot)
@@ -99,7 +96,9 @@ Adds the ability to use wolframalpha.com computational search engine. You need t
 class MyCompanyBot < Hipbot::Bot
   configure do |c|
     # ...
-    c.plugins   = [ Hipbot::Plugins::WolframAlpha.new('my-api-key') ]
+    Hipbot::Plugins::WolframAlpha.configure do |c|
+      c.appid = 'my-api-key'
+    end
   end
 end
 ```
