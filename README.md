@@ -18,11 +18,12 @@ And then execute:
 
 ## Usage
 
-To include a plugin, use hipbot's configuration (https://github.com/pewniak747/hipbot#customize)
+To include a plugin, require it in your bot.rb file:
 
 ``` ruby
 require 'hipbot'
 require 'hipbot-plugins'
+require 'hipbot-plugins/human'
 
 class MyCompanyBot < Hipbot::Bot
   configure do |c|
