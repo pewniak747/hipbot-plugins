@@ -10,8 +10,13 @@ module Hipbot
 
       desc 'links to github code search in organization'
       on /^github (.+)/ do |query|
-        query = URI::encode query
-        reply "https://github.com/search?q=#{query}+%40#{organization}&ref=searchresults&type=Code&s=indexed"
+        query_hash = {
+          q: "#{query} @#{organization}",
+          ref: 'searchresults',
+          type: 'Code',
+          s: 'indexed'
+        }
+        reply "https://github.com/search?#{query_hash.to_query}"
       end
     end
   end
