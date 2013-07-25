@@ -1,5 +1,6 @@
 require "hipbot"
 require "hipbot-plugins/version"
+require "hipbot-plugins/help"
 require "hipbot-plugins/human"
 require "hipbot-plugins/github"
 require "hipbot-plugins/google"
