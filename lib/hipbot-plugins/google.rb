@@ -6,7 +6,8 @@ module Hipbot
       desc 'returns first few results for Google search'
       on /^google (.+)/ do |search|
         get('http://ajax.googleapis.com/ajax/services/search/web', { q: search, safe: 'off', v: '1.0' }) do |http|
-          http.json['responseData']['results'].each do |page|
+          results = http.json.fetch('responseData', {}).fetch('results', [])
+          results.each do |page|
             reply("#{page['url']} - #{page['titleNoFormatting']}")
           end
         end
@@ -19,7 +20,8 @@ module Hipbot
         left    = objects.count
         objects.each do |obj|
           get('http://ajax.googleapis.com/ajax/services/search/web', { q: obj, safe: 'off', v: '1.0' }) do |http|
-            score  = http.json['responseData']['cursor']['resultCount'].delete(' ').to_i
+            resultCount = http.json.fetch('responseData', {}).fetch('cursor', {}).fetch('resultCount', 0)
+            score  = resultCount.delete(' ').to_i
             winner = { name: obj, score: score } if score > winner[:score]
             left  -= 1
           end
@@ -31,8 +33,9 @@ module Hipbot
       desc 'returns sample result of Google image search eg. `image trollface`'
       on /^image (.+)/ do |search|
         get('http://ajax.googleapis.com/ajax/services/search/images', { q: search, safe: 'moderate', v: '1.0', hl: 'pl', imgsz: 'large', rsz: 1 }) do |http|
-          if http.json['responseData']['results'].present?
-            reply http.json['responseData']['results'].sample['url']
+          results = http.json.fetch('responseData', {})['results']
+          if results.present?
+            reply results.sample['url']
           else
             reply "I found nothing, #{sender}"
           end
@@ -41,9 +44,10 @@ module Hipbot
 
       desc 'returns sample result of YouTube search eg. `yt rick roll`'
       on /^youtube (.+)/, /^yt (.+)/ do |query|
-        get('http://gdata.youtube.com/feeds/api/videos', { q: query, alt: 'json', :'max-results' => 3, orderBy: 'relevance'}) do |http|
-          if http.json['feed']['entry'].present?
-            reply http.json['feed']['entry'].sample['link'][0]['href']
+        get('http://gdata.youtube.com/feeds/api/videos', { q: query, alt: 'json', :'max-results' => 3, orderBy: 'relevance' }) do |http|
+          entry = http.json.fetch('feed', {})['entry']
+          if entry.present?
+            reply entry.sample['link'][0]['href']
           else
             reply "I found nothing, #{sender}"
           end
@@ -53,10 +57,16 @@ module Hipbot
       desc 'translates text using Google Translate eg. `translate en:pl Hello world`'
       on /^translate (.+)/ do |query|
         params, text  = query.split(' ', 2)
-        from, to      = params.split(':')
-        if to.nil?
-          to   = from
-          from = 'pl'
+        if text.nil?
+          text = params
+          from = 'auto'
+          to   = 'en'
+        else
+          from, to = params.split(':')
+          if to.nil?
+            to   = from
+            from = 'auto'
+          end
         end
 
         params = {
