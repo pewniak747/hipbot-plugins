@@ -39,9 +39,16 @@ module Hipbot
       end
 
       cleverbot = Cleverbot::Client.new
+      coder     = HTMLEntities.new
       default do |message|
-        coder     = HTMLEntities.new
-        reply(coder.decode(cleverbot.write(message)) || 'I don\'t undersand you')
+        response = cleverbot.write(message)
+        if response.present?
+          # fixing broken encoding from cleverbot
+          response = coder.decode(response).gsub(/\|([0-9]{4})/){ |s| s.hex.chr }
+          reply(response)
+        else
+          reply('I don\'t undersand you')
+        end
       end
     end
   end
