@@ -27,14 +27,14 @@ module Hipbot
           end
         end
         sleep(1) until left == 0
-        notify("...and the winner is #{winner[:name]}!", 'Google')
+        reply("...and the winner is #{winner[:name]}!")
       end
 
       desc 'returns sample result of Google image search eg. `image trollface`'
       on /^image (.+)/ do |search|
         get('http://ajax.googleapis.com/ajax/services/search/images', { q: search, safe: 'moderate', v: '1.0', hl: 'pl', imgsz: 'large', rsz: 1 }) do |http|
-          results = http.json.fetch('responseData', {})['results']
-          if results.present?
+          results = http.json.fetch('responseData', {}).fetch('results', [])
+          if results.any?
             reply results.sample['url']
           else
             reply "I found nothing, #{sender}"
@@ -45,8 +45,8 @@ module Hipbot
       desc 'returns sample result of YouTube search eg. `yt rick roll`'
       on /^youtube (.+)/, /^yt (.+)/ do |query|
         get('http://gdata.youtube.com/feeds/api/videos', { q: query, alt: 'json', :'max-results' => 3, orderBy: 'relevance' }) do |http|
-          entry = http.json.fetch('feed', {})['entry']
-          if entry.present?
+          entry = http.json.fetch('feed', {}).fetch('entry', [])
+          if entry.any?
             reply entry.sample['link'][0]['href']
           else
             reply "I found nothing, #{sender}"

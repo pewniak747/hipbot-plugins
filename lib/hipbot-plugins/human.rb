@@ -29,7 +29,7 @@ module Hipbot
       desc 'randomly chooses by default 1 person from online users eg. `choose 3`'
       on /^choose( ([0-9]+))?/, room: true do |_, number|
         number ||= 1
-        reply("/me chooses #{room.users.sample(number.to_i).map(&:name).to_sentence}") if room.present?
+        reply("/me chooses #{room.users.sample(number.to_i).map(&:name).to_sentence}")
       end
 
       desc 'comforts with a pat on the back'
@@ -38,11 +38,10 @@ module Hipbot
         reply("#{message.sender.first_name}, everything is going to be alright!")
       end
 
-      cleverbot = Cleverbot::Client.new
-      coder     = HTMLEntities.new
+      coder = HTMLEntities.new
       default do |message|
-        response = cleverbot.write(message)
-        if response.present?
+        response  = Cleverbot::Client.write(message).to_s
+        if !response.empty?
           # fixing broken encoding from cleverbot
           response = coder.decode(response).gsub(/\|([0-9]{4})/){ |s| s.hex.chr }
           reply(response)

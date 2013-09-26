@@ -8,8 +8,11 @@ module Hipbot
       desc 'explains a phrase using UrbanDictionary'
       on /^explain (.+)/ do |phrase|
         entry = Urban::Dictionary.search(phrase)
-        definition = entry.definitions.try(:first)
-        reply(definition || "Congrats #{message.sender.first_name}, you just invented a completely new #{phrase.split.count > 1 ? 'phrase' : 'word'}.")
+        if entry.definitions.nil? || entry.definitions.empty?
+          reply("Congrats #{sender.first_name}, you just invented a completely new #{phrase.count(' ').zero? ? 'word' : 'phrase'}.")
+        else
+          reply(entry.definitions.first)
+        end
       end
     end
   end

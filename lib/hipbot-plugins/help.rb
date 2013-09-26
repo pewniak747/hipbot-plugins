@@ -18,7 +18,7 @@ module Hipbot
 
       desc 'generates help for all reactions'
       on /^help$/ do
-        reactions_with_description = Hipbot.plugin_reactions.reject{ |reaction| reaction.desc.nil? }
+        reactions_with_description = Hipbot.reactions.reject{ |reaction| reaction.desc.nil? }
         help = reactions_with_description.map do |reaction|
           "#{reaction.plugin_name}: #{reaction.readable_command} - #{reaction.desc}"
         end
@@ -27,11 +27,13 @@ module Hipbot
 
       desc 'returns more info on given command'
       on /^help (.+)/ do |subject|
-        reactions = Hipbot.plugin_reactions.select{ |reaction| reaction.plugin_name == subject || reaction.readable_command =~ /#{subject}/ || reaction.desc =~ /#{subject}/ }
+        reactions = Hipbot.reactions.select do |reaction|
+          [reaction.plugin_name, reaction.readable_command, reaction.desc].any?{ |v| v =~ /#{subject}/i }
+        end
         help = []
         reactions.each do |reaction|
           help << "#{reaction.plugin_name}: #{reaction.readable_command}"
-          if reaction.desc.present?
+          if !reaction.desc.nil?
             help << "  - #{reaction.desc}"
           end
 
@@ -45,7 +47,7 @@ module Hipbot
             help << "  - All rooms and private messages"
           end
 
-          if reaction.options[:from].present?
+          if !reaction.options[:from].nil?
             help << "  - Only for: #{reaction.users.to_sentence}"
           else
             help << "  - From anybody"

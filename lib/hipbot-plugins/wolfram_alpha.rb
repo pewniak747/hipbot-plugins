@@ -11,9 +11,9 @@ module Hipbot
       on /^wolfram (.+)/ do |query|
         result = Wolfram.fetch(query)
         result.pods[1..3].each do |pod|
-          if pod.plaintext.present?
+          if !pod.plaintext.nil?
             text = pod.plaintext
-          elsif pod.img.attributes['src'].value.present?
+          elsif !pod.img.attributes['src'].value.nil?
             text = pod.img.attributes['src'].value + "#.jpg"
           else
             next
