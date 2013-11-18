@@ -37,9 +37,9 @@ module Hipbot
             help << "  - #{reaction.desc}"
           end
 
-          if reaction.private_message_only?
+          if reaction.to_private_message?
             help << "  - Private only"
-          elsif reaction.any_room?
+          elsif reaction.in_any_room?
             help << "  - Room only"
           elsif reaction.rooms.any?
             help << "  - Only in: #{reaction.rooms.to_sentence}"
