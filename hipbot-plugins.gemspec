@@ -19,7 +19,6 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency "hipbot", '>= 1.0.0.rc1'
   gem.add_runtime_dependency 'cleverbot'
   gem.add_runtime_dependency 'htmlentities'
-  # gem.add_runtime_dependency 'urban_dictionary', '>= 0.0.2'
   gem.add_runtime_dependency 'wolfram'
 
   gem.add_development_dependency 'rake'
