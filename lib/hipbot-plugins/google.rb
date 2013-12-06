@@ -21,7 +21,7 @@ module Hipbot
         objects.each do |obj|
           get('http://ajax.googleapis.com/ajax/services/search/web', { q: obj, safe: 'off', v: '1.0' }) do |http|
             resultCount = http.json.fetch('responseData', {}).fetch('cursor', {}).fetch('resultCount', 0)
-            score  = resultCount.delete(' ').to_i
+            score  = resultCount.to_s.delete(' ').to_i
             winner = { name: obj, score: score } if score > winner[:score]
             left  -= 1
           end

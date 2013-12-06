@@ -8,6 +8,11 @@ module Hipbot
         reply "https://github.com/#{organization}/#{project.name}/compare/#{stage1}...#{stage2}" if project
       end
 
+      desc 'links to production <-> staging comparision'
+      on /^compare$/, room: true do
+        reply "https://github.com/#{organization}/#{project.name}/compare/production...staging" if project
+      end
+
       desc 'links to github code search in organization'
       on /^github (.+)/ do |query|
         query_hash = {
