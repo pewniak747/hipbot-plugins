@@ -18,7 +18,8 @@ module Hipbot
           tt: generator.upper_text,
           tb: generator.lower_text
         }
-        image_url = "http://memecaptain.com/i?#{query.to_query}"
+        encoded_query = query.respond_to?(:to_query) ? query.to_query : URI.encode_www_form(query)
+        image_url = "http://v1.memecaptain.com/i?#{encoded_query}"
         reply(image_url)
       end
 
@@ -31,7 +32,7 @@ module Hipbot
 
         def image_url
           meme_name = self.class.memes.fetch(meme.to_s)
-          "http://memecaptain.com/#{meme_name}.jpg"
+          "http://v1.memecaptain.com/#{meme_name}.png"
         end
 
         private
