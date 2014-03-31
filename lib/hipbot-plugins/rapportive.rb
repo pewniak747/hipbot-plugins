@@ -1,3 +1,5 @@
+require 'open-uri'
+
 module Hipbot
   module Plugins
     class Rapportive
@@ -6,7 +8,7 @@ module Hipbot
       desc 'do something'
       on /^raport (\S*) (\S*) from (.*)/ do |firstname, lastname, domain|
         raport = Rapportive.new(firstname, lastname, domain)
-        reply(result.to_s)
+        reply(raport.to_s)
       end
 
       class Rapportive
@@ -26,8 +28,12 @@ module Hipbot
         private
 
         def session_token
-          @token ||= open(session_token_url).read
-          JSON.parse(@token).fetch(:session_token) { "" }
+          begin
+            @token ||= open(session_token_url).read
+            JSON.parse(@token).fetch(:session_token) { "" }
+          rescue OpenURI::HTTPError
+            ""
+          end
         end
 
         def session_token_url
@@ -35,11 +41,16 @@ module Hipbot
         end
 
         def profile
-          @profile ||= emails.each do |email|
-            body = open(profiles_url(email), "X-Session-Token" => session_token).read
-            contact = JSON.parse(body)
-            return contact if found?(contact)
+          emails.each do |email|
+            begin
+              body = open(profiles_url(email), "X-Session-Token" => session_token).read
+              contact = JSON.parse(body)
+              return contact if found?(contact)
+            rescue OpenURI::HTTPError
+              nil # returns nil for check in to_s method - requests limit reached
+            end
           end
+          nil
         end
 
         def profiles_url(email)
@@ -70,7 +81,7 @@ module Hipbot
         end
 
         def found?(contact)
-          contact["first_name"] != "" && contact["last_name"] != ""
+          contact['contact']['first_name'] != "" && contact['contact']['last_name'] != ""
         end
       end
     end
