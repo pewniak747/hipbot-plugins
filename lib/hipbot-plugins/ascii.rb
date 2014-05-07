@@ -3,6 +3,7 @@ class ASCII
   include Hipbot::Plugin
 
   TABLE_FLIPS = [
+    '❨╯°□°❩╯︵┻━┻',
     '(╯°□°）╯︵ ┻━┻',
     '(╯°□°)╯︵ ┻━┻',
     '(ノ ゜Д゜)ノ ︵ ┻━┻',
