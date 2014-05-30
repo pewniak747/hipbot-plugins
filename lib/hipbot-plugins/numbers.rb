@@ -2,26 +2,26 @@ require 'open-uri'
 
 module Hipbot
   module Plugins
-    class MemeGenerator
+    class NumbersPlugin
       include Hipbot::Plugin
 
       desc "provides a random piece of number trivia"
-      on /^numbers trivia/ do 
+      on /^numbers trivia$/ do 
         reply(NumbersTriviaGenerator.new("trivia").get_trivia)
       end
 
       desc "provides a random piece of math trivia"
-      on /^numbers math/ do
+      on /^numbers math$/ do
         reply(NumbersTriviaGenerator.new("math").get_trivia)
       end
 
       desc "provides a random piece of date trivia"
-      on /^numbers date/ do
+      on /^numbers date$/ do
         reply(NumbersTriviaGenerator.new("date").get_trivia)
       end
 
       desc "provides a random piece of year trivia"
-      on /^numbers year/ do
+      on /^numbers year$/ do
         reply(NumbersTriviaGenerator.new("year").get_trivia)
       end
 
