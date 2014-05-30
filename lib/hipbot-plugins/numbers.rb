@@ -2,7 +2,7 @@ require 'open-uri'
 
 module Hipbot
   module Plugins
-    class Numbers
+    class MemeGenerator
       include Hipbot::Plugin
 
       desc "provides a random piece of number trivia"
