@@ -27,12 +27,12 @@ module Hipbot
 
       desc "provides a random piece of number trivia for the specified number"
       on /^numbers trivia (\d+)/ do |integer|
-        reply(NumbersTriviaGenerator.new("trivia", number).get_trivia)
+        reply(NumbersTriviaGenerator.new("trivia", integer).get_trivia)
       end
 
       desc "provides a random piece of information about the specified number"
       on /^numbers math (\d+)/ do |integer|
-        reply(NumbersTriviaGenerator.new("math", number).get_trivia)
+        reply(NumbersTriviaGenerator.new("math", integer).get_trivia)
       end
 
       desc "provides a random piece of information about the specified month and day"
@@ -42,7 +42,7 @@ module Hipbot
 
       desc "provides a random piece of information about the specified year"
       on /^numbers year (\d+)/ do |year|
-        reply(NumbersTriviaGenerator.new("year", number).get_trivia)
+        reply(NumbersTriviaGenerator.new("year", year).get_trivia)
       end
 
       class NumbersTriviaGenerator
