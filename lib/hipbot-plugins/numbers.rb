@@ -48,19 +48,13 @@ module Hipbot
       class NumbersTriviaGenerator
         URL = "http://numbersapi.com/"
 
-        def initialize(type, number)
+        def initialize(type, number = 'random', day = '')
           @type = type
-          @number = number
-        end
-
-        def initialize(type, month, day)
-          @type = type
-          @number = "#{month}/#{day}"
-        end
-
-        def initialize(type) 
-          @type = type
-          @number = "random"
+          if day != ''
+            @number = "#{number}/#{day}"
+          else
+            @number = number
+          end
         end
         
         def get_trivia
