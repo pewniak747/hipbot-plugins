@@ -15,12 +15,23 @@ module Hipbot
         generator = Generator.new(meme, text)
         query = {
           u: generator.image_url,
-          tt: generator.upper_text,
-          tb: generator.lower_text
+          t1: generator.upper_text,
+          t2: generator.lower_text,
+          t1x: '',
+          t1y: '',
+          t1w: '',
+          t1h: '',
+          t2x: '',
+          t2y: '',
+          t2w: '',
+          t2h: ''
         }
         encoded_query = query.respond_to?(:to_query) ? query.to_query : URI.encode_www_form(query)
-        image_url = "http://v1.memecaptain.com/i?#{encoded_query}"
-        reply(image_url)
+        image_url = "http://v1.memecaptain.com/g?#{encoded_query}"
+        open(image_url) { |f|
+          response = JSON.parse(f.read)
+          reply(response['imageUrl'])
+        }
       end
 
       class Generator
@@ -32,7 +43,7 @@ module Hipbot
 
         def image_url
           meme_name = self.class.memes.fetch(meme.to_s)
-          "http://v1.memecaptain.com/#{meme_name}.png"
+          "http://v1.memecaptain.com/#{meme_name}"
         end
 
         private
@@ -56,12 +67,64 @@ module Hipbot
 
         def self.memes
           {
-            "yuno" => "y_u_no",
-            "idontalways" => "most_interesting",
-            "allthethings" => "all_the_things",
-            "yodawg" => "xzibit",
-            "toodamnhigh" => "too_damn_high",
-            "fry" => "fry"
+            
+            'aliens' => 'aliens.jpg',
+            'all_the_things' => 'all_the_things.jpg',
+            'all_the_things_sad' => 'all_the_things2.jpg',
+            'annoying_facebook_girl' => 'annoying_facebook_girl.jpg',
+            'aw_yeah' => 'aw_yeah.png',
+            'bad_joke_eel' => 'bad_joke_eel.jpg',
+            'bad_luck_brian' => 'bad_luck_brian.jpg',
+            'bad_time' => 'bad_time.jpg',
+            'bear_grylls' => 'bear_grylls.jpg',
+            'boromir' => 'boromir.jpg',
+            'business_cat' => 'business_cat.jpg',
+            'conspiracy_keanu' => 'conspiracy_keanu.jpg',
+            'cool_story_bro' => 'cool_story_bro.jpg',
+            'courage_wolf' => 'courage_wolf.jpg',
+            'dwight_schrute' => 'dwight_schrute.jpg',
+            'first_world_problems' => 'first_world_problems.jpg',
+            'feel_bad' => 'you_should_feel_bad.jpg',
+            'fry' => 'fry.png',
+            'good_guy_greg' => 'good_guy_greg.jpg',
+            'grandma' => 'grandma.jpg',
+            'insanity_wolf' => 'insanity_wolf.jpg',
+            'internet_husband' => 'internet_husband.jpg',
+            'internet_kid' => 'first_day_on_the_internet_kid.jpg',
+            'joseph_ducreux' => 'joseph_ducreux.jpg',
+            'viking' => 'laundry_room_viking.jpg',
+            'me_gusta' => 'me_gusta.png',
+            'megaman' => 'megaman_derp.jpg',
+            'most_interesting' => 'most_interesting.jpg',
+            'ned_stark' => 'ned_stark.jpg',
+            'neil_degrasse_tyson' => 'neil_degrasse_tyson.png',
+            'not_bad' => 'not_bad.png',
+            'ok' => 'ok.png',
+            'paranoid_parrot' => 'paranoid_parrot.jpg',
+            'patrick' => 'patrick.jpg',
+            'philosoraptor' => 'philosoraptor.jpg',
+            'rage' => 'rage.png',
+            'ron_swanson' => 'ron_swanson.jpg',
+            'sap' => 'sap.jpg',
+            'scumbag_steve' => 'scumbag_steve.jpg',
+            'seriously' => 'seriously.png',
+            'slowpoke' => 'slowpoke.jpg',
+            'socially_awesome_awkward_penguin' => 'socially_awesome_awkward_penguin.jpg',
+            'success_kid' => 'success_kid.jpg',
+            'the_more_you_know' => 'the_more_you_know.jpg',
+            'ti_duck' => 'ti_duck.jpg',
+            'too_damn_high' => 'too_damn_high.jpg',
+            'town_crier' => 'town_crier.jpg',
+            'troll_face' => 'troll_face.jpg',
+            'troll_hunter' => 'troll_hunter.jpg',
+            'trolldad' => 'trolldad.png',
+            'trolldad_dancing' => 'trolldad_dancing.png',
+            'tyler_durden' => 'tyler_durden.jpg',
+            'walter' => 'walter.jpg',
+            'wonka' => 'wonka.jpg',
+            'yo_dawg' => 'xzibit.jpg',
+            'y_u_no' => 'y_u_no.jpg',
+            'yao_ming' => 'yao_ming.jpg'
           }
         end
       end
