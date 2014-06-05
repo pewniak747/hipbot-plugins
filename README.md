@@ -108,6 +108,21 @@ Hipbot responds to:
 
 * wolfram plot x^2 + 3x - 1
 
+### Hipbot::Plugins::NumbersPlugin
+
+Provides random number factoids
+
+Hipbot responds to:
+
+* numbers trivia
+* numbers math
+* numbers date
+* numbers year
+* numbers trivia 42
+* numbers math 42
+* numbers date 12 31
+* numbers year 42
+
 ## Contributing
 
 1. Fork it
