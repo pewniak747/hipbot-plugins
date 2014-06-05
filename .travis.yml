@@ -3,15 +3,17 @@ rvm:
   - 1.9.3
   - 2.0.0
   - 2.1.0
+  - 2.1.1
   - jruby-19mode
   - rbx-2.1.1
+  - jruby-head
   - ruby-head
 matrix:
   allow_failures:
     - rvm: ruby-head
+    - rvm: jruby-head
 notifications:
   email:
     recipients:
       - pewniak747@gmail.com
       - bartosz.kopinski@netguru.pl
-
