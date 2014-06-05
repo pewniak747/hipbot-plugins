@@ -1,5 +1,4 @@
 require 'cleverbot'
-require 'htmlentities'
 
 module Hipbot
   module Plugins
@@ -38,13 +37,10 @@ module Hipbot
         reply("#{message.sender.first_name}, everything is going to be alright!")
       end
 
-      coder = HTMLEntities.new
       cleverbot = Cleverbot::Client.new
       default do |message|
-        response = cleverbot.write(message).to_s
+        response = cleverbot.write(message)
         if !response.empty?
-          # fixing broken encoding from cleverbot
-          response = coder.decode(response).gsub(/\|([0-9]{4})/){ |s| s.hex.chr }
           reply(response)
         else
           reply('I don\'t understand you')
