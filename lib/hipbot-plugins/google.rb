@@ -6,7 +6,9 @@ module Hipbot
       desc 'returns first few results for Google search'
       on /^google (.+)/ do |search|
         get('http://ajax.googleapis.com/ajax/services/search/web', { q: search, safe: 'off', v: '1.0' }) do |http|
-          results = http.json.fetch('responseData', {}).fetch('results', [])
+          response_data = http.json['responseData'] || {}
+          results       = response_data['results'] || []
+
           results.each do |page|
             reply("#{page['url']} - #{page['titleNoFormatting']}")
           end
@@ -20,7 +22,10 @@ module Hipbot
         left    = objects.count
         objects.each do |obj|
           get('http://ajax.googleapis.com/ajax/services/search/web', { q: obj, safe: 'off', v: '1.0' }) do |http|
-            resultCount = http.json.fetch('responseData', {}).fetch('cursor', {}).fetch('resultCount', 0)
+            response_data = http.json['responseData'] || {}
+            cursor        = response_data['cursor'] || {}
+            resultCount   = cursor['resultCount'] || 0
+
             score  = resultCount.to_s.delete(' ').to_i
             winner = { name: obj, score: score } if score > winner[:score]
             left  -= 1
@@ -33,7 +38,9 @@ module Hipbot
       desc 'returns sample result of Google image search eg. `image trollface`'
       on /^image (.+)/ do |search|
         get('http://ajax.googleapis.com/ajax/services/search/images', { q: search, safe: 'moderate', v: '1.0', hl: 'pl', imgsz: 'large', rsz: 1 }) do |http|
-          results = http.json.fetch('responseData', {}).fetch('results', [])
+          response_data = http.json['responseData'] || {}
+          results       = response_data['results'] || []
+
           if results.any?
             reply results.sample['url']
           else
