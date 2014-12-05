@@ -68,7 +68,7 @@ module Hipbot
         def self.memes
           {
             #'aliens' => 'aliens.jpg',
-            #'all_the_things' => 'all_the_things.jpg',
+            'all_the_things' => 'Dv99KQ',
             #'all_the_things_sad' => 'all_the_things2.jpg',
             #'annoying_facebook_girl' => 'annoying_facebook_girl.jpg',
             #'aw_yeah' => 'aw_yeah.png',
@@ -84,7 +84,7 @@ module Hipbot
             #'dwight_schrute' => 'dwight_schrute.jpg',
             #'first_world_problems' => 'first_world_problems.jpg',
             #'feel_bad' => 'you_should_feel_bad.jpg',
-            #'fry' => 'fry.png',
+            'fry' => 'CsNF8w',
             #'good_guy_greg' => 'good_guy_greg.jpg',
             #'grandma' => 'grandma.jpg',
             #'insanity_wolf' => 'insanity_wolf.jpg',
@@ -97,7 +97,7 @@ module Hipbot
             #'most_interesting' => 'most_interesting.jpg',
             #'ned_stark' => 'ned_stark.jpg',
             #'neil_degrasse_tyson' => 'neil_degrasse_tyson.png',
-            #'not_bad' => 'not_bad.png',
+            'not_bad' => 'B8KEYA',
             #'ok' => 'ok.png',
             #'paranoid_parrot' => 'paranoid_parrot.jpg',
             #'patrick' => 'patrick.jpg',
@@ -112,7 +112,7 @@ module Hipbot
             #'success_kid' => 'success_kid.jpg',
             #'the_more_you_know' => 'the_more_you_know.jpg',
             #'ti_duck' => 'ti_duck.jpg',
-            #'too_damn_high' => 'too_damn_high.jpg',
+            'too_damn_high' => 'RCkv6Q',
             #'town_crier' => 'town_crier.jpg',
             'troll_face' => 'dGAIFw',
             #'troll_hunter' => 'troll_hunter.jpg',
@@ -122,7 +122,7 @@ module Hipbot
             #'walter' => 'walter.jpg',
             #'wonka' => 'wonka.jpg',
             'yo_dawg' => 'Yqk_kg',
-            #'y_u_no' => 'y_u_no.jpg',
+            'y_u_no' => 'NryNmg',
             #'yao_ming' => 'yao_ming.jpg'
           }
         end
