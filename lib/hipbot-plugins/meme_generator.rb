@@ -43,7 +43,7 @@ module Hipbot
 
         def image_url
           meme_name = self.class.memes.fetch(meme.to_s)
-          "http://v1.memecaptain.com/#{meme_name}"
+          "http://memecaptain.com/src_images/#{meme_name}"
         end
 
         private
@@ -122,7 +122,7 @@ module Hipbot
             'tyler_durden' => 'tyler_durden.jpg',
             'walter' => 'walter.jpg',
             'wonka' => 'wonka.jpg',
-            'yo_dawg' => 'xzibit.jpg',
+            'yo_dawg' => 'Yqk_kg',
             'y_u_no' => 'y_u_no.jpg',
             'yao_ming' => 'yao_ming.jpg'
           }
